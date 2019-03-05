@@ -1,0 +1,105 @@
+ <div class="data" id="data">
+      <h2>Seats</h2>
+           <table id="myTable"  cellpadding="10"> 
+  <tr>
+    <th>Name</th>
+    <th>Current House</th>
+    <th>Region</th>
+    <th>Founder</th>
+    <th>Action</th>
+  </tr>   
+  <tr> 
+    <td>Winterfell</td> 
+    <td>Stark</td> 
+    <td>The North</td> 
+    <td>Brandon the Builder</td> 
+    <td id="table_buttons>
+      <div class="btns"> 
+      <button id="edit">edit</button>
+      <button id= "delete">delete</button> 
+      </div> 
+    </td> 
+  </tr>
+
+  <tr> 
+    <td>Casterly Rock</td> 
+    <td>Lannister</td> 
+    <td>The Westerlands</td> 
+    <td>Corlos</td>  
+    <td id="table_buttons>
+      <div class="btns"> 
+      <button id="edit">edit</button>
+      <button id= "delete">delete</button> 
+      </div> 
+    </td> 
+  </tr>
+
+
+  </table> 
+
+
+
+      <p>A drop down menu will go here to relate characters by the chosen attribute. A pop up with the table will appear. </p> 
+
+    </div>
+
+   <div class = "button-wrapper">
+      <button type="button" class="open-button" 
+      onclick="openForm()"> ADD A SEAT </button>
+    </div>
+
+    <div class = "form-popup" id="form"> 
+      <form action="/action-page.html" style="background:url(seat.jpg)"
+        class="form-container"> 
+          <h1>Add a Seat</h1>
+          <label for="Name"><b>Name:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Name" name="name" required> 
+
+          <label for="Current House"><b> Current House:</b> 
+          </label>
+          <select name="Current House"> 
+            <option value="Test1"> Test1 </option> 
+            <option value="Test2"> Test2 </option>
+            <option value="Test3"> Test3 </option>
+              <!--Make it so that options are brought in from available cultures--> 
+          </select>
+
+          <label for="Region"><b>Region:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Region" name="Region"> 
+
+          <label for="Founder"><b>Founder:</b></label>          
+          <select name="Founder"> 
+            <option value="Test1"> Test1 </option> 
+            <option value="Test2"> Test2 </option>
+            <option value="Test3"> Test3 </option>
+              <!--Make it so that options are brought in from available Houses--> 
+          </select>
+
+          <button type=submit" 
+          class="submit-button"
+          onclick="closeForm()"> Submit</button> 
+          <button type="button"
+          class="cancel-button" 
+          onclick="closeForm()" > Cancel</button> 
+      </form>
+    </div>
+
+    <script>
+      function openForm(){
+        document.getElementById("form").style.display = "block"; 
+      }
+
+      function closeForm(){
+        document.getElementById("form").style.display = "none"; 
+      }
+
+    </script>
+
+
+
+
+  </body>

@@ -1,0 +1,216 @@
+@font-face {
+    font-family: 'GameofThrones';
+    src: url('GameofThrones.woff') format('woff'),
+    url('GameofThrones.ttf') format('truetype');
+}
+.container{
+    position: relative; 
+    width: 100%;
+    height: 100%; 
+    #display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden;  
+    z-index=0; 
+}
+.container h1{
+    text-align: center;
+    font-family: GameofThrones; 
+    font-size: 1.5rem;
+    color : white;
+    padding: 20px;
+    margin: 15px;
+    z-index:1;
+}
+
+h1{
+    text-align: center;
+    font-family: GameofThrones; 
+    font-size: 1.5rem;
+    color : white;
+    padding: 20px;
+    margin: 15px;
+    z-index:1;
+}
+.video-container{
+    position: absolute; 
+    top:0; 
+    left:0; 
+    width: 100%;
+    height: 100%; 
+    overflow: hidden; 
+}
+
+#myVideo{
+    position:fixed; 
+    -webkit-transform: scaleX(2); 
+    -moz=transform: scaleX(2);  
+    width: 100%
+    right:0;
+    bottom:0;
+    min-height: 100%
+    min-width: 100%;
+    width: auto; 
+    height: auto;
+    z-index:-1;
+}
+.nav{
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white; 
+    text-align: center; 
+}
+
+.nav li{
+    display:inline;
+    border-right: 1px solid #bbb;
+}
+
+.nav a{
+    display: inline-block; 
+    font-family: GameofThrones; 
+    color: black;
+    text-align: center; 
+    padding: 14px 16px;
+    text-decoration: none;  
+    opacity: .8; 
+}
+
+.nav li a:hover{
+    background-color: black;
+    color: white;
+}
+
+.nav li:last-child{
+    border-right:none;
+}
+
+table{
+    margin: 0px auto;  
+    border: 3px solid white; 
+    border-spacing: 0px; 
+    color: white; 
+}
+
+th{
+   font-family: GameofThrones; 
+}
+th,td {
+    border: 3px solid white; 
+    border-spacing: 0px; 
+    text-align: center; 
+}
+
+button{
+	font-family: GameofThrones; 
+	background-color: white; 
+   	color: black; 
+	font-size: .75rem;
+}
+button:hover{
+	background-color: black; 
+   	color: white; 
+}
+
+.button-wrapper{
+    text-align: center; 
+}
+
+.open-button{
+    text-align: center;
+    font-family: GameofThrones; 
+    font-size: 1rem;
+    color : black; 
+    position:relative;
+    border: none;
+    background-color: white; 
+    padding: 14px 16px;
+}
+
+.open-button:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer; 
+    padding: 14px 16px;
+    opacity: .8; 
+}
+
+.form-popup{
+    font-family: GameofThrones; 
+    display: none;
+    z-index: 9;
+}
+
+.form-container{
+    width: 100%; 
+    height: 100%; 
+    top: 25%; 
+    left:10%
+    top: 10%; 
+    background-color: white; 
+    position:absolute; 
+    color:white;
+}
+
+.form-container label{
+
+    display: block; 
+}
+.form-container input[type=text], select, textarea{
+    font-family: GameofThrones; 
+    width: 50%; 
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: lightgray; 
+}
+
+.form-container .submit-button,
+.form-container .cancel-button {
+    text-align: center;
+    font-family: GameofThrones; 
+    font-size: 1rem;
+    color : black; 
+    position:relative;
+    border: none;
+    background-color: lightgray; 
+    margin-bottom:10px;
+    padding:16px 20px;
+    width: 50%;
+}
+.form-container .submit-button:hover, 
+.form-container .cancel-button:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer; 
+}
+
+.data h2{
+    text-align: center;
+    font-family: GameofThrones; 
+    font-size: 1.5rem;
+    color : white;
+    padding: 10px;
+    margin: 15px; 
+}
+
+.data ul{
+    text-align: center;
+    font-family: GameofThrones; 
+    font-size: 1rem;
+    color : white;
+    padding: 10px;
+    margin: 15px; 
+    list-style-type: none; 
+}
+
+.data p{
+    text-align: center;
+    font-size: 1rem;
+    color : white;
+    padding: 10px;
+    margin: 15px; 
+}

@@ -1,0 +1,102 @@
+<div class="data" id="data">
+      <h2>Cultures</h2>
+ 
+        <table id="myTable"  cellpadding="10"> 
+  <tr>
+    <th>Name</th>
+    <th>Language</th>
+    <th>Religion</th>
+    <th>Society</th>
+    <th>Action</th>
+  </tr>   
+  <tr> 
+    <td>Northmen</td> 
+    <td>Common Tongue</td> 
+    <td>Old Gods of the Forrest</td> 
+    <td>Feudal-based</td> 
+    <td id="table_buttons>
+      <div class="btns"> 
+      <button id="edit">edit</button>
+      <button id= "delete">delete</button> 
+      </div> 
+    </td> 
+  </tr>
+
+  <tr> 
+    <td>Andals</td> 
+    <td>Old Tongue</td> 
+    <td>Old Gods of the Forest</td> 
+    <td>Clan-based</td>  
+    <td id="table_buttons>
+      <div class="btns"> 
+      <button id="edit">edit</button>
+      <button id= "delete">delete</button> 
+      </div> 
+    </td> 
+  </tr>
+
+
+  </table> 
+
+
+
+      <p>A drop down menu will go here to relate characters by the chosen attribute. A pop up with the table will appear. </p> 
+
+    </div>
+
+
+   <div class = "button-wrapper">
+      <button type="button" class="open-button" 
+      onclick="openForm()"> ADD A CULTURE </button>
+    </div>
+
+    <div class = "form-popup" id="form"> 
+      <form action="/action-page.html" style="background:url(culture.jpg)"
+        class="form-container"> 
+          <h1>Add a Culture</h1>
+          <label for="Name"><b>Name:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Name" name="name" required> 
+
+          <label for="Language"><b>Language:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Language" name="Language"> 
+
+          <label for="Religion"><b>Religion:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Religion" name="Religion"> 
+
+           <label for="Society"><b>Society:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Society" name="Society">
+
+
+          <button type=submit" 
+          class="submit-button"
+          onclick="closeForm()"> Submit</button> 
+          <button type="button"
+          class="cancel-button" 
+          onclick="closeForm()" > Cancel</button> 
+      </form>
+    </div>
+
+    <script>
+      function openForm(){
+        document.getElementById("form").style.display = "block"; 
+      }
+
+      function closeForm(){
+        document.getElementById("form").style.display = "none"; 
+      }
+
+
+    </script>
+
+
+
+
+  </body>

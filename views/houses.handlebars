@@ -1,0 +1,108 @@
+ <div class="data" id="data">
+      <h2>Houses</h2>
+        <table id="myTable"  cellpadding="10"> 
+  <tr>
+    <th>Name</th>
+    <th>Sigil</th>
+    <th>Words</th>
+    <th>Current Leader</th>
+    <th>Great House?</th>
+    <th>Action</th>
+  </tr>   
+  <tr> 
+    <td>Stark</td> 
+    <td>A grey direwolf on a white field</td> 
+    <td>Winter Is Coming</td> 
+    <td>Sansa Stark</td> 
+    <td>Yes</td>
+    <td id="table_buttons>
+      <div class="btns"> 
+      <button id="edit">edit</button>
+      <button id= "delete">delete</button> 
+      </div> 
+    </td> 
+  </tr>
+
+  <tr> 
+    <td>Lannister</td> 
+    <td>A golden lion rampant on a crimson field</td> 
+    <td>Hear Me Roar! & A Lannister Always Pays His Debts</td> 
+    <td>Cersei Lannister</td>  
+    <td>Yes</td> 
+    <td id="table_buttons>
+      <div class="btns"> 
+      <button id="edit">edit</button>
+      <button id= "delete">delete</button> 
+      </div> 
+    </td> 
+  </tr>
+
+
+  </table> 
+
+
+
+      <p>A drop down menu will go here to relate characters by the chosen attribute. A pop up with the table will appear. </p> 
+
+
+    </div>
+
+   <div class = "button-wrapper">
+      <button type="button" class="open-button" 
+      onclick="openForm()"> ADD A HOUSE </button>
+    </div>
+
+    <div class = "form-popup" id="form"> 
+      <form action="/action-page.html" style="background:url(houses.jpg)"
+        class="form-container"> 
+          <h1>Add a House</h1>
+          <label for="Name"><b>Name:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Name" name="name" required> 
+
+          <label for="Sigil"><b>Sigil:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Sigil" name="Sigil"> 
+
+          <label for="Words"><b>Words:</b> 
+          </label>
+          <textarea placeholder ="Enter a description" 
+          name="Words" rows= "10"></textarea>
+
+          <label for="Current Leader"><b>Current Leader:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter the Current Leader" name="Current Leader"> 
+
+          <label for="isGreatHouse"><b>Great House?</b> 
+          </label>
+          <select name="Great House"> 
+            <option value="No"> No</option> 
+            <option value="Yes"> Yes </option>
+          </select>
+
+          <button type=submit" 
+          class="submit-button"
+          onclick="closeForm()"> Submit</button> 
+          <button type="button"
+          class="cancel-button" 
+          onclick="closeForm()" > Cancel</button> 
+      </form>
+    </div>
+
+    <script>
+      function openForm(){
+        document.getElementById("form").style.display = "block"; 
+      }
+
+      function closeForm(){
+        document.getElementById("form").style.display = "none"; 
+      }
+
+
+    </script>
+
+
+  </body>
