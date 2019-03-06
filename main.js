@@ -12,12 +12,46 @@ app.set('mysql', mysql);
 app.use(express.static('./views')); 
 
 app.get('/',function(req,res){
+   var context = {};
   res.render('home'); 
 });
 
-app.get('/characters',function(req,res){
-  res.render('characters'); 
-});
+function getCharacters(res, mysql, context, complete){
+  mysql.pool.query("SELECT * FROM characters", function(error, results, fields){
+  if(error){
+    res.write(JSON.stringify(error));
+    res.end();
+  }
+  context.character = results;
+  complete();
+  });
+}
+
+
+
+app.get('/characters',function(req,res, next){
+  var context = {};
+  var mysql = req.app.get('mysql');
+  var callbackCount = 0; 
+  getCharacters(res, mysql, context, complete);
+
+   function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                //console.log(context); 
+                res.render('characters', context);
+  }
+
+  }
+}); 
+
+
+
+
+
+//app.get('/characters',function(req,res){
+//  res.render('characters'); 
+//});
 
 app.get('/cultures',function(req,res){
   res.render('cultures'); 
@@ -30,6 +64,12 @@ app.get('/houses',function(req,res){
 app.get('/seats',function(req,res){
   res.render('seats'); 
 });
+
+function isAliveHelper(stuff){
+    console.log(stuff); 
+}
+
+
 
 /*
 app.get('/',function(req,res,next){
