@@ -2,42 +2,51 @@
       <h2>Characters</h2>
  
         <table id="myTable"  cellpadding="10"> 
-  <tr>
+  
+
+
+
+  <thead>
     <th>Name</th>
     <th>Culture</th>
     <th>Mother's House</th>
     <th>Father's House</th>
+    <th>Allegiace</th>
     <th>Status</th>
     <th>Action</th>
-  </tr>   
-  <tr> 
-    <td>John Snow</td> 
-    <td>Northmen</td> 
-    <td>Stark</td> 
-    <td>Targaryen</td> 
-    <td>Alive</td> 
-    <td id="table_buttons>
+  </thead>   
+  <tbody> 
+
+  {{#each character}}
+    <tr> 
+      <td>{{character_name}}</td>
+      <td>{{character_culture}}</td>
+      <td>{{mothers_house}}</td>
+      <td>{{fathers_house}}</td>
+      <td>{{allegiance}}</td>
+      <td>
+        <script>
+          if({{is_alive}} == "1"){
+            document.write("Alive"); 
+          }
+          else{
+            document.write("Deceased"); 
+          }
+        </script>
+      </td> 
+      <td id="table_buttons>
       <div class="btns"> 
       <button id="edit">edit</button>
       <button id= "delete">delete</button> 
       </div> 
     </td> 
-  </tr>
 
-  <tr> 
-    <td> Arya Stark</td> 
-    <td>Northmen</td> 
-    <td>Tully</td> 
-    <td>Stark</td> 
-    <td>Alive</td> 
-    <td id="table_buttons>
-      <div class="btns"> 
-      <button id="edit">edit</button>
-      <button id= "delete">delete</button> 
-      </div> 
-    </td> 
-  </tr>
+      </tr>
+  {{/each}}
 
+</tbody>
+
+<!--[{"character_id":1,"character_name":"Eddard Stark","character_culture":7,"mothers_house":null,"fathers_house":4,"allegiance":14,"is_alive":0}, -->
 
   </table> 
 
@@ -115,10 +124,6 @@
       function closeForm(){
         document.getElementById("form").style.display = "none"; 
       }
-
-
+ 
     </script>
-
-
-
   </body>
