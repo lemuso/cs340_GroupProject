@@ -1,38 +1,30 @@
  <div class="data" id="data">
       <h2>Seats</h2>
            <table id="myTable"  cellpadding="10"> 
-  <tr>
+  <thead>
     <th>Name</th>
-    <th>Current House</th>
+    <th>House</th>
     <th>Region</th>
     <th>Founder</th>
     <th>Action</th>
-  </tr>   
-  <tr> 
-    <td>Winterfell</td> 
-    <td>Stark</td> 
-    <td>The North</td> 
-    <td>Brandon the Builder</td> 
-    <td id="table_buttons>
+  </thead>   
+  <tbody> 
+{{#each seat}}
+    <tr> 
+      <td>{{seat_name}}</td>
+      <td>{{current_house}}</td>
+      <td>{{region}}</td>
+      <td>{{founder}}</td>
+      <td id="table_buttons>
       <div class="btns"> 
       <button id="edit">edit</button>
       <button id= "delete">delete</button> 
       </div> 
     </td> 
-  </tr>
 
-  <tr> 
-    <td>Casterly Rock</td> 
-    <td>Lannister</td> 
-    <td>The Westerlands</td> 
-    <td>Corlos</td>  
-    <td id="table_buttons>
-      <div class="btns"> 
-      <button id="edit">edit</button>
-      <button id= "delete">delete</button> 
-      </div> 
-    </td> 
-  </tr>
+      </tr>
+  {{/each}}
+  </tbody>
 
 
   </table> 

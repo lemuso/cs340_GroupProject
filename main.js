@@ -17,7 +17,7 @@ app.get('/',function(req,res){
 });
 
 function getCharacters(res, mysql, context, complete){
-  mysql.pool.query("SELECT * FROM characters", function(error, results, fields){
+  mysql.pool.query("SELECT a.character_Id, a.character_name, d.character_culture,b.mothers_house, c.fathers_house, e.allegiance, a.is_alive FROM ( SELECT character_Id, character_name, character_culture,mothers_house, fathers_house, allegiance, is_alive FROM characters ) a LEFT JOIN ( SELECT house_id, houses_name AS mothers_house FROM houses ) b ON a.mothers_house =  b.house_id  LEFT JOIN ( SELECT house_id, houses_name AS fathers_house FROM houses ) c ON a.fathers_house =  c.house_id  LEFT JOIN (SELECT culture_id, culture_name AS character_culture FROM cultures) d ON a.character_culture = d.culture_id LEFT JOIN (SELECT house_id, houses_name AS allegiance FROM houses) e ON a.allegiance = e.house_id", function(error, results, fields){
   if(error){
     res.write(JSON.stringify(error));
     res.end();
@@ -47,23 +47,112 @@ app.get('/characters',function(req,res, next){
 
 
 
+function getCultures(res, mysql, context, complete){
+  mysql.pool.query("SELECT * FROM cultures", function(error, results, fields){
+  if(error){
+    res.write(JSON.stringify(error));
+    res.end();
+  }
+  context.culture = results;
+  complete();
+  });
+}
 
+
+
+app.get('/cultures',function(req,res, next){
+  var context = {};
+  var mysql = req.app.get('mysql');
+  var callbackCount = 0; 
+  getCultures(res, mysql, context, complete);
+
+   function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                //console.log(context); 
+                res.render('cultures', context);
+  }
+
+  }
+}); 
+
+
+
+function getHouses(res, mysql, context, complete){
+  mysql.pool.query("SELECT * FROM houses", function(error, results, fields){
+  if(error){
+    res.write(JSON.stringify(error));
+    res.end();
+  }
+  context.house = results;
+  complete();
+  });
+}
+
+
+
+app.get('/houses',function(req,res, next){
+  var context = {};
+  var mysql = req.app.get('mysql');
+  var callbackCount = 0; 
+  getHouses(res, mysql, context, complete);
+
+   function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                //console.log(context); 
+                res.render('houses', context);
+  }
+
+  }
+});
+
+
+
+function getSeats(res, mysql, context, complete){
+  mysql.pool.query("SELECT * FROM seats", function(error, results, fields){
+  if(error){
+    res.write(JSON.stringify(error));
+    res.end();
+  }
+  context.seat = results;
+  complete();
+  });
+}
+
+
+
+app.get('/seats',function(req,res, next){
+  var context = {};
+  var mysql = req.app.get('mysql');
+  var callbackCount = 0; 
+  getSeats(res, mysql, context, complete);
+
+   function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                //console.log(context); 
+                res.render('seats', context);
+  }
+
+  }
+});  
 
 //app.get('/characters',function(req,res){
 //  res.render('characters'); 
 //});
 
-app.get('/cultures',function(req,res){
-  res.render('cultures'); 
-});
+//app.get('/cultures',function(req,res){
+//  res.render('cultures'); 
+//});
 
-app.get('/houses',function(req,res){
-  res.render('houses'); 
-});
+//app.get('/houses',function(req,res){
+//  res.render('houses'); 
+//});
 
-app.get('/seats',function(req,res){
-  res.render('seats'); 
-});
+//app.get('/seats',function(req,res){
+//  res.render('seats'); 
+//});
 
 function isAliveHelper(stuff){
     console.log(stuff); 

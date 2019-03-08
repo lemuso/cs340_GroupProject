@@ -2,38 +2,32 @@
       <h2>Cultures</h2>
  
         <table id="myTable"  cellpadding="10"> 
-  <tr>
+  <thead>
     <th>Name</th>
     <th>Language</th>
     <th>Religion</th>
     <th>Society</th>
     <th>Action</th>
-  </tr>   
-  <tr> 
-    <td>Northmen</td> 
-    <td>Common Tongue</td> 
-    <td>Old Gods of the Forrest</td> 
-    <td>Feudal-based</td> 
-    <td id="table_buttons>
+  </thead>   
+  <tbody> 
+{{#each culture}}
+    <tr> 
+      <td>{{culture_name}}</td>
+      <td>{{language}}</td>
+      <td>{{religion}}</td>
+      <td>{{society}}</td>
+      <td id="table_buttons>
       <div class="btns"> 
       <button id="edit">edit</button>
       <button id= "delete">delete</button> 
       </div> 
     </td> 
-  </tr>
 
-  <tr> 
-    <td>Andals</td> 
-    <td>Old Tongue</td> 
-    <td>Old Gods of the Forest</td> 
-    <td>Clan-based</td>  
-    <td id="table_buttons>
-      <div class="btns"> 
-      <button id="edit">edit</button>
-      <button id= "delete">delete</button> 
-      </div> 
-    </td> 
-  </tr>
+      </tr>
+  {{/each}}
+  </tbody>
+
+
 
 
   </table> 
