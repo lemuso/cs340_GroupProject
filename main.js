@@ -110,7 +110,7 @@ app.get('/houses',function(req,res, next){
 
 
 function getSeats(res, mysql, context, complete){
-  mysql.pool.query("SELECT * FROM seats", function(error, results, fields){
+  mysql.pool.query("SELECT a.seat_id, a.seat_name, b.current_house, a.region, c.founder FROM(SELECT seat_id, seat_name, current_house, region, founder FROM seats) a LEFT JOIN (SELECT house_id, houses_name AS current_house FROM houses) b ON a.current_house = b.house_id LEFT JOIN (SELECT character_Id, character_name AS founder FROM characters) c ON a.founder = c.character_Id", function(error, results, fields){
   if(error){
     res.write(JSON.stringify(error));
     res.end();
