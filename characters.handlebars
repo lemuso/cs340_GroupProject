@@ -1,0 +1,144 @@
+<div class="data" id="data">
+      <h2>Characters</h2>
+ 
+        <table id="myTable"  cellpadding="10"> 
+  
+
+
+
+  <thead>
+    <th>Name</th>
+    <th>Culture</th>
+    <th>Mother's House</th>
+    <th>Father's House</th>
+    <th>Allegiance</th>
+    <th>Status</th>
+    <th>Action</th>
+  </thead>   
+  <tbody> 
+
+  {{#each character}}
+    <tr> 
+      <td>{{character_name}}</td>
+      <td>{{character_culture}}</td>
+      <td>{{mothers_house}}</td>
+      <td>{{fathers_house}}</td>
+      <td>{{allegiance}}</td>
+      <td>
+        <script>
+          if({{is_alive}} == "1"){
+            document.write("Alive"); 
+          }
+          else{
+            document.write("Deceased"); 
+          }
+        </script>
+      </td> 
+      <td id="table_buttons>
+      <div class="btns"> 
+      <button id="edit">edit</button>
+      <button id= "delete">delete</button> 
+      </div> 
+    </td> 
+
+      </tr>
+  {{/each}}
+
+</tbody>
+
+<!--[{"character_id":1,"character_name":"Eddard Stark","character_culture":7,"mothers_house":null,"fathers_house":4,"allegiance":14,"is_alive":0}, -->
+
+  </table> 
+
+
+
+      <p>A drop down menu will go here to relate characters by the chosen attribute. A pop up with the table will appear. </p> 
+
+    </div>
+
+
+
+
+    <div class = "button-wrapper">
+      <button type="button" class="open-button" 
+      onclick="openForm()"> ADD A CHARACTER </button>
+    </div>
+
+    <div class = "form-popup" id="character-form"> 
+      <form id = "addCharacter" action="/characters" method="post"
+        class="form-container"> 
+          <h3>Add a Character</h3>
+          <label for="Name"><b>Name:</b> 
+          </label>
+          <input type="text"
+          placeholder="Enter Name" name="character_name" required> 
+
+          <label for="Culture"><b> Culture:</b> 
+          </label>
+          <select id='culture-filter' name="character_culture"> 
+            {{#each culture}}
+            <option value="{{culture_id}}"> {{culture_name}} </option> 
+            {{/each}}
+              <!--Make it so that options are brought in from available cultures--> 
+            
+          </select>
+
+          <label for="Mother's House"><b>Mother's  House:</b> 
+          </label>
+          <select id='mothers_house-filter' name="mothers-house"> 
+            {{#each house}}
+            <option value="{{house_id}}"> {{houses_name}} </option> 
+            {{/each}}
+            </select>
+
+
+          <label for="Father's House"><b>Father's  House:</b> 
+          </label>
+          <select id='fathers_house-filter' name="fathers-house"> 
+            {{#each house}}
+            <option value="{{house_id}}"> {{houses_name}} </option> 
+            {{/each}}
+          </select>
+
+          <label for="Allegiances"><b>Allegiances:</b></label>     
+          <select id='Allegiance-filter' name="allegiance"> 
+            {{#each house}}
+            <option value="{{house_id}}"> {{houses_name}} </option> 
+            {{/each}}
+          </select>     
+          
+
+          <label for="isAlive"><b>Status:</b> 
+          </label>
+          <select name="is_alive"> 
+            <option value="1"> Alive</option> 
+            <option value="0"> Deceased </option>
+          </select>
+
+          <input type="submit" class="submit-button" value="Submit" > 
+
+      </form>
+
+
+    </div>
+
+    <script>
+      function openForm(){
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("character-form").style.display = "block"; 
+      }
+
+      function closeForm(){
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("character-form").style.display = "none"; 
+      }
+
+      function addCharacter(){
+        console.log("success"); 
+      }
+
+    
+    </script>
+  </body>
