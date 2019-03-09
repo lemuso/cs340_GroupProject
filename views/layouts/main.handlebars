@@ -9,9 +9,20 @@ Group Project
   <head> 
     <title>Game of Thrones - Home</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    {{#each jsscripts}}
-    <script src="/static/{{this}}"></script>
-    {{/each}}
+    <script>
+      function deleteCharacter(id){
+        var confirmDelete = confirm("Are you sure you want to delete this character?");
+        if(confirmDelete){
+            $.ajax({
+              url: '/characters/'+ id,
+              type: 'DELETE',
+              success: function(result){
+                window.location.reload(true);
+              }
+            });
+        }
+      };
+    </script>
 
   </head>
   <body style="background-color:black">
