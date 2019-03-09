@@ -33,6 +33,7 @@ app.get('/characters',function(req,res, next){
   var context = {};
   var mysql = req.app.get('mysql');
   var callbackCount = 0; 
+  context .jsscripts = ["deleteCharacter.js"];
   getCharacters(res, mysql, context, complete);
 
    function complete(){
@@ -43,6 +44,27 @@ app.get('/characters',function(req,res, next){
   }
 
   }
+});
+
+app.delete('/characters/:id', function(req, res){
+
+  console.log("DELETE ROUTE HIT");
+
+  var mysql = req.app.get('mysql');
+  var sql = "DELETE FROM characters WHERE character_id = ?";
+  var inserts = [req.params.id];
+
+  sql = mysql.pool.query(sql, inserts, function(err, results, fields){
+    if(err){
+      // NOTE: ** WONT DELETE if CHARACTER is associated with other tables
+      console.log(err);
+      res.write(JSON.stringify(err));
+      res.status(400);
+      res.end();
+    }else{
+      res.status(202).end();
+      }
+    });
 }); 
 
 
@@ -136,7 +158,9 @@ app.get('/seats',function(req,res, next){
   }
 
   }
-});  
+}); 
+
+
 
 //app.get('/characters',function(req,res){
 //  res.render('characters'); 
