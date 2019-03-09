@@ -79,7 +79,7 @@ app.get('/cultures',function(req,res, next){
 
 
 function getHouses(res, mysql, context, complete){
-  mysql.pool.query("SELECT * FROM houses", function(error, results, fields){
+  mysql.pool.query("SELECT a.house_id, a.houses_name, a.sigil, a.words, b.current_leader, a.is_great_house FROM(SELECT house_id, houses_name, sigil, words, current_leader, is_great_house FROM houses) a LEFT JOIN (SELECT character_Id, character_name AS current_leader FROM characters) b ON a.current_leader = b.character_Id", function(error, results, fields){
   if(error){
     res.write(JSON.stringify(error));
     res.end();
