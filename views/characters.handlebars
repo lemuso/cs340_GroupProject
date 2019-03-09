@@ -11,7 +11,7 @@
     <th>Culture</th>
     <th>Mother's House</th>
     <th>Father's House</th>
-    <th>Allegiace</th>
+    <th>Allegiance</th>
     <th>Status</th>
     <th>Action</th>
   </thead>   
@@ -37,7 +37,7 @@
       <td id="table_buttons>
       <div class="btns"> 
       <button id="edit">edit</button>
-      <button id= "delete" onclick = "deleteCharacter({{character_id}})">delete</button> 
+      <button id= "delete">delete</button> 
       </div> 
     </td> 
 
@@ -64,66 +64,81 @@
       onclick="openForm()"> ADD A CHARACTER </button>
     </div>
 
-    <div class = "form-popup" id="form"> 
-      <form action="/action-page.html" style="background:url(people.jpg)"
+    <div class = "form-popup" id="character-form"> 
+      <form id = "addCharacter" action="/characters" method="post"
         class="form-container"> 
-          <h1>Add a Character</h1>
+          <h3>Add a Character</h3>
           <label for="Name"><b>Name:</b> 
           </label>
           <input type="text"
-          placeholder="Enter Name" name="name" required> 
+          placeholder="Enter Name" name="character_name" required> 
 
           <label for="Culture"><b> Culture:</b> 
           </label>
-          <select name="Cultures"> 
-            <option value="Test1"> Test1 </option> 
-            <option value="Test2"> Test2 </option>
-            <option value="Test3"> Test3 </option>
+          <select id='culture-filter' name="character_culture"> 
+            {{#each culture}}
+            <option value="{{culture_id}}"> {{culture_name}} </option> 
+            {{/each}}
               <!--Make it so that options are brought in from available cultures--> 
+            
           </select>
 
           <label for="Mother's House"><b>Mother's  House:</b> 
           </label>
-          <input type="text"
-          placeholder="Enter Mother's House" name="Mother's House"> 
+          <select id='mothers_house-filter' name="mothers-house"> 
+            {{#each house}}
+            <option value="{{house_id}}"> {{houses_name}} </option> 
+            {{/each}}
+            </select>
+
 
           <label for="Father's House"><b>Father's  House:</b> 
           </label>
-          <input type="text"
-          placeholder="Enter Father's House" name="Fathers's House"> 
-
-          <label for="Allegiances"><b>Allegiances:</b></label>          
-          <select multiple name="Allegiances"> 
-            <option value="Test1"> Test1 </option> 
-            <option value="Test2"> Test2 </option>
-            <option value="Test3"> Test3 </option>
-              <!--Make it so that options are brought in from available Houses--> 
+          <select id='fathers_house-filter' name="fathers-house"> 
+            {{#each house}}
+            <option value="{{house_id}}"> {{houses_name}} </option> 
+            {{/each}}
           </select>
+
+          <label for="Allegiances"><b>Allegiances:</b></label>     
+          <select id='Allegiance-filter' name="allegiance"> 
+            {{#each house}}
+            <option value="{{house_id}}"> {{houses_name}} </option> 
+            {{/each}}
+          </select>     
+          
 
           <label for="isAlive"><b>Status:</b> 
           </label>
-          <select name="Cultures"> 
-            <option value="Yes"> Alive</option> 
-            <option value="No"> Dead </option>
+          <select name="is_alive"> 
+            <option value="1"> Alive</option> 
+            <option value="0"> Deceased </option>
           </select>
 
-          <button type=submit" 
-          class="submit-button"
-          onclick="closeForm()"> Submit</button> 
-          <button type="button"
-          class="cancel-button" 
-          onclick="closeForm()" > Cancel</button> 
+          <input type="submit" class="submit-button" value="Submit" > 
+
       </form>
+
+
     </div>
 
     <script>
       function openForm(){
-        document.getElementById("form").style.display = "block"; 
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("character-form").style.display = "block"; 
       }
 
       function closeForm(){
-        document.getElementById("form").style.display = "none"; 
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("character-form").style.display = "none"; 
       }
- 
+
+      function addCharacter(){
+        console.log("success"); 
+      }
+
+    
     </script>
   </body>

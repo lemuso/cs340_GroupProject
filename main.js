@@ -1,15 +1,19 @@
 var express = require('express');
 var mysql = require('./dbcon.js');
+var bodyParser = require('body-parser');
 
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 app.engine('handlebars', handlebars.engine);
+app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
 app.set('mysql', mysql);
 
 app.use(express.static('./views')); 
+
+
 
 app.get('/',function(req,res){
    var context = {};
@@ -27,44 +31,23 @@ function getCharacters(res, mysql, context, complete){
   });
 }
 
-
-
 app.get('/characters',function(req,res, next){
   var context = {};
   var mysql = req.app.get('mysql');
   var callbackCount = 0; 
-  context .jsscripts = ["deleteCharacter.js"];
   getCharacters(res, mysql, context, complete);
+  getCultures(res, mysql, context, complete);
+  getHouses(res, mysql, context, complete);
+
 
    function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 3){
                 //console.log(context); 
                 res.render('characters', context);
   }
 
   }
-});
-
-app.delete('/characters/:id', function(req, res){
-
-  console.log("DELETE ROUTE HIT");
-
-  var mysql = req.app.get('mysql');
-  var sql = "DELETE FROM characters WHERE character_id = ?";
-  var inserts = [req.params.id];
-
-  sql = mysql.pool.query(sql, inserts, function(err, results, fields){
-    if(err){
-      // NOTE: ** WONT DELETE if CHARACTER is associated with other tables
-      console.log(err);
-      res.write(JSON.stringify(err));
-      res.status(400);
-      res.end();
-    }else{
-      res.status(202).end();
-      }
-    });
 }); 
 
 
@@ -158,9 +141,39 @@ app.get('/seats',function(req,res, next){
   }
 
   }
-}); 
+});  
+/*
+app.post('/characters',function(req,res,next){
+  var context = {};
+  mysql.pool.query("INSERT INTO characters (`character_name`, character_culture, mothers_house, fathers_house, allegiance, is_alive) VALUES (?,?,?,?,?,?)", [req.query.c], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
 
+    res.redirect('/characters');
 
+  });
+})
+
+*/
+
+app.post('/characters', function(req, res){
+    console.log(req.body.character_name)
+    console.log(req.body)
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO characters (character_name, character_culture, mothers_house, fathers_house, allegiance, is_alive) VALUES (?,?,?,?,?,?)";
+    var inserts = [req.body.character_name, req.body.character_culture, req.body.mothers_house, req.body.fathers_house, req.body.allegiance, req.body.is_alive];
+    sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+        if(error){
+            console.log(JSON.stringify(error))
+            res.write(JSON.stringify(error));
+            res.end();
+        }else{
+            res.redirect('/characters');
+        }
+    });
+});
 
 //app.get('/characters',function(req,res){
 //  res.render('characters'); 
