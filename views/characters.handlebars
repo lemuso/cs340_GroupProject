@@ -20,10 +20,52 @@
   {{#each character}}
     <tr> 
       <td>{{character_name}}</td>
-      <td>{{character_culture}}</td>
-      <td>{{mothers_house}}</td>
-      <td>{{fathers_house}}</td>
-      <td>{{allegiance}}</td>
+      <td>
+        <script>
+            if(!'{{character_culture}}'){
+              document.write("Unknown"); 
+            }
+            else{
+              document.write('{{character_culture}}'); 
+            }
+        </script>
+
+      </td>
+      <td>
+        <script>
+            if(!'{{mothers_house}}'){
+              document.write("Unknown"); 
+            }
+            else{
+              document.write('{{mothers_house}}'); 
+            }
+        </script>
+      </td>
+
+      <td>
+        <script>
+            if(!'{{fathers_house}}'){
+              document.write("Unknown"); 
+            }
+            else{
+              document.write('{{fathers_house}}'); 
+            }
+        </script>
+      </td>
+
+
+      <td>
+        <script>
+            if(!'{{allegiance}}'){
+              document.write("Unknown"); 
+            }
+            else{
+              document.write('{{allegiance}}'); 
+            }
+        </script>
+
+      </td>
+
       <td>
         <script>
           if({{is_alive}} == "1"){
@@ -36,7 +78,7 @@
       </td> 
       <td id="table_buttons>
       <div class="btns"> 
-      <button id="edit">edit</button>
+      <button id="edit" onclick="editCharacter('{{character_name}}','{{character_culture}}','{{mothers_house}}','{{fathers_house}}','{{allegiance}}','{{is_alive}}')">edit</button>
       <button id= "delete">delete</button> 
       </div> 
     </td> 
@@ -59,23 +101,29 @@
 
 
 
+
+
+
     <div class = "button-wrapper">
       <button type="button" class="open-button" 
       onclick="openForm()"> ADD A CHARACTER </button>
     </div>
 
+
+
     <div class = "form-popup" id="character-form"> 
       <form id = "addCharacter" action="/characters" method="post"
         class="form-container"> 
-          <h3>Add a Character</h3>
+          <h3 id="form_text">Add a Character</h3>
           <label for="Name"><b>Name:</b> 
           </label>
-          <input type="text"
-          placeholder="Enter Name" name="character_name" required> 
+          <input id="name_input" type="text"
+          placeholder="Enter Name" name="character_name" required > 
 
           <label for="Culture"><b> Culture:</b> 
           </label>
           <select id='culture-filter' name="character_culture"> 
+            <option value="" >null</option>
             {{#each culture}}
             <option value="{{culture_id}}"> {{culture_name}} </option> 
             {{/each}}
@@ -85,7 +133,8 @@
 
           <label for="Mother's House"><b>Mother's  House:</b> 
           </label>
-          <select id='mothers_house-filter' name="mothers-house"> 
+          <select id='mothers_house-filter' name="mothers_house"> 
+            <option value="" >null</option>
             {{#each house}}
             <option value="{{house_id}}"> {{houses_name}} </option> 
             {{/each}}
@@ -94,14 +143,16 @@
 
           <label for="Father's House"><b>Father's  House:</b> 
           </label>
-          <select id='fathers_house-filter' name="fathers-house"> 
+          <select id='fathers_house-filter' name="fathers_house"> 
+            <option value="" >null</option>
             {{#each house}}
             <option value="{{house_id}}"> {{houses_name}} </option> 
             {{/each}}
           </select>
 
-          <label for="Allegiances"><b>Allegiances:</b></label>     
+          <label for="Allegiances"><b>Allegiance:</b></label>     
           <select id='Allegiance-filter' name="allegiance"> 
+            <option value="" >null</option>
             {{#each house}}
             <option value="{{house_id}}"> {{houses_name}} </option> 
             {{/each}}
@@ -110,23 +161,26 @@
 
           <label for="isAlive"><b>Status:</b> 
           </label>
-          <select name="is_alive"> 
+          <select id='status_filter' name="is_alive"> 
             <option value="1"> Alive</option> 
             <option value="0"> Deceased </option>
           </select>
 
           <input type="submit" class="submit-button" value="Submit" > 
+          <button type="button"
+          class="cancel-button" 
+          onclick="closeForm()" > Cancel</button> 
 
       </form>
-
-
     </div>
+
 
     <script>
       function openForm(){
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         document.getElementById("character-form").style.display = "block"; 
+        document.getElementById("addCharacter").reset();
       }
 
       function closeForm(){
@@ -135,10 +189,81 @@
         document.getElementById("character-form").style.display = "none"; 
       }
 
-      function addCharacter(){
-        console.log("success"); 
+      function editCharacter(name,culture, mothers_house, fathers_house, allegiance, status){
+        document.getElementById("character-form").style.display = "block";
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("addCharacter").reset();
+        form_text.innerText = "Edit Character";  
+        //name_input.placeholder.innerText = character.character_name; 
+        document.getElementById("name_input").value = name; 
+        var culture_select = document.getElementById('culture-filter'); 
+
+        for(var i = 0; i < culture_select.length; i++){
+          if(culture_select.options[i].text== culture){
+            culture_select.selectedIndex = i; 
+            break; 
+          }
+          else{
+            culture_select.selectedIndex = 0; 
+          }
+        }
+
+        var mothers_house_select = document.getElementById('mothers_house-filter'); 
+
+
+         for(var i = 0; i < mothers_house_select.length; i++){
+          if(mothers_house_select.options[i].text== mothers_house){
+            mothers_house_select.selectedIndex = i; 
+            break; 
+          }
+          else{
+            mothers_house_select.selectedIndex = 0;
+          }
+        }
+
+        var fathers_house_select = document.getElementById('fathers_house-filter'); 
+
+         for(var i = 0; i < fathers_house_select.length; i++){
+          if(fathers_house_select.options[i].text== fathers_house){
+            fathers_house_select.selectedIndex = i; 
+            break; 
+          }
+          else{
+            fathers_house_select.selectedIndex = 0; 
+          }
+        }
+
+        var allegiance_select = document.getElementById('Allegiance-filter'); 
+
+         for(var i = 0; i < allegiance_select.length; i++){
+          if(allegiance_select.options[i].text== allegiance){
+            allegiance_select.selectedIndex = i; 
+            break; 
+          }
+          else{
+            allegiance_select.selectedIndex = 0;
+          }
+        }
+
+        var status_select = document.getElementById('status_filter'); 
+
+         for(var i = 0; i < status_select.length; i++){
+          if(status_select.options[i].value == status){
+            status_select.selectedIndex = i; 
+            break; 
+          }
+          else{
+            status_select.selectedIndex = 0;
+          }
+
       }
 
+      document.getElementById("addCharacter").action = "/characters/update"
     
+
+
+    }
+
     </script>
   </body>
