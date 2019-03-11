@@ -3,7 +3,15 @@ var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
 
 var app = express();
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+
+var handlebars = require('express-handlebars').create({
+  defaultLayout:'main',
+  helpers:{
+    json: function(context){
+        return JSON.stringify(context); 
+    }
+  }
+});
 
 app.engine('handlebars', handlebars.engine);
 app.use(bodyParser.urlencoded({extended:true}));
@@ -19,6 +27,8 @@ app.get('/',function(req,res){
    var context = {};
   res.render('home'); 
 });
+
+
 
 function getCharacters(res, mysql, context, complete){
   mysql.pool.query("SELECT a.character_Id, a.character_name, d.character_culture,b.mothers_house, c.fathers_house, e.allegiance, a.is_alive FROM ( SELECT character_Id, character_name, character_culture,mothers_house, fathers_house, allegiance, is_alive FROM characters ) a LEFT JOIN ( SELECT house_id, houses_name AS mothers_house FROM houses ) b ON a.mothers_house =  b.house_id  LEFT JOIN ( SELECT house_id, houses_name AS fathers_house FROM houses ) c ON a.fathers_house =  c.house_id  LEFT JOIN (SELECT culture_id, culture_name AS character_culture FROM cultures) d ON a.character_culture = d.culture_id LEFT JOIN (SELECT house_id, houses_name AS allegiance FROM houses) e ON a.allegiance = e.house_id", function(error, results, fields){
@@ -164,6 +174,17 @@ app.post('/characters', function(req, res){
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO characters (character_name, character_culture, mothers_house, fathers_house, allegiance, is_alive) VALUES (?,?,?,?,?,?)";
     var inserts = [req.body.character_name, req.body.character_culture, req.body.mothers_house, req.body.fathers_house, req.body.allegiance, req.body.is_alive];
+
+
+    for(var i = 0; i < inserts.length; i++){
+      
+      if(inserts[i] == ''){
+        delete inserts[i];  
+      }
+
+    }
+
+    
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
             console.log(JSON.stringify(error))
