@@ -32,6 +32,15 @@ h1{
     margin: 15px;
     z-index:1;
 }
+h2{
+    text-align: center;
+    font-family: GameofThrones; 
+    font-size: 1.5rem;
+    color : white;
+    padding: 20px;
+    margin: 15px;
+    z-index:1;
+}
 .video-container{
     position: absolute; 
     top:0; 
@@ -138,35 +147,48 @@ button:hover{
     opacity: .8; 
 }
 
-.form-popup{
+#character-form, #edit-character-form{
     font-family: GameofThrones; 
+    background-image: url("people.jpg");
+    position: absolute;
+    width: 90%;
+    min-height:620px;
+    top:25px;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: none;
-    z-index: 9;
+    z-index: 9; 
 }
 
 .form-container{
-    width: 100%; 
-    height: 100%; 
-    top: 25%; 
-    left:10%
-    top: 10%; 
-    background-color: white; 
-    position:absolute; 
-    color:white;
+    position: relative;
+    height: 100%;
+    top: 10%;
+    right: 0;
+    margin: 20px;
+    max-width: 600px; 
+    padding: 16px;
+    background-color: white;
+    opacity:.9;
 }
 
 .form-container label{
 
     display: block; 
 }
+.form-container h3{
+     text-align: center;
+     font-size: 2rem; 
+}
 .form-container input[type=text], select, textarea{
     font-family: GameofThrones; 
-    width: 50%; 
+    width: 80%; 
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
     background: lightgray; 
 }
+
 
 .form-container .submit-button,
 .form-container .cancel-button {
@@ -179,7 +201,7 @@ button:hover{
     background-color: lightgray; 
     margin-bottom:10px;
     padding:16px 20px;
-    width: 50%;
+    width: 100%;
 }
 .form-container .submit-button:hover, 
 .form-container .cancel-button:hover{
@@ -187,6 +209,13 @@ button:hover{
     color: white;
     cursor: pointer; 
 }
+
+.filter{
+    text-align:center;   
+    width: 25%;
+    margin:10px auto
+}
+
 
 .data h2{
     text-align: center;
@@ -213,4 +242,16 @@ button:hover{
     color : white;
     padding: 10px;
     margin: 15px; 
+}
+
+.filter-submit {
+    font-family: GameofThrones; 
+    font-size: 1rem;
+    color : black; 
+    position:relative;
+    border: none;
+    background-color: lightgray; 
+    margin-bottom:10px;
+    padding:16px 20px;
+    width: 30%;
 }

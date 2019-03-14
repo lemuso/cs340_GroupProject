@@ -1,6 +1,47 @@
 <div class="data" id="data">
       <h2>Characters</h2>
- 
+      <h2>Filter:</h2>
+        
+          <div class = "filter" id="filter-form"> 
+            <form id = "filter" action="/filter" method="post">
+              <select>
+                <optgroup label = "Culture">
+                  {{#each culture}}
+                  <option value="{'culture', '{{culture_id}}'}"> {{culture_name}} </option>
+                  {{/each}}
+                </optgroup>
+
+                <optgroup label = "Mother's House">
+                    {{#each house}}
+                    <option value="{{house_id}}"> {{houses_name}} </option> 
+                    {{/each}}
+                </optgroup>
+
+                <optgroup label = "Fathers's House">
+                    {{#each house}}
+                    <option value="{{house_id}}"> {{houses_name}} </option> 
+                    {{/each}}
+                </optgroup>
+
+                <optgroup label = "Allegiance">
+                    {{#each house}}
+                    <option value="{{house_id}}"> {{houses_name}} </option> 
+                    {{/each}}
+                </optgroup>
+
+                <optgroup label = "Status">
+                    <option value="1"> Alive </option> 
+                    <option value="0"> Deceased </option> 
+                </optgroup>
+
+
+              </select>
+
+              <input type="submit" class="filter-submit" value="Submit" > 
+
+            </form>
+          </div>
+
         <table id="myTable"  cellpadding="10"> 
   
 
@@ -78,8 +119,8 @@
       </td> 
       <td id="table_buttons>
       <div class="btns"> 
-      <button id="edit" onclick="editCharacter('{{character_name}}','{{character_culture}}','{{mothers_house}}','{{fathers_house}}','{{allegiance}}','{{is_alive}}')">edit</button>
-      <button id= "delete">delete</button> 
+      <button id="edit" onclick="editCharacter('{{character_name}}','{{character_culture}}','{{mothers_house}}','{{fathers_house}}','{{allegiance}}','{{is_alive}}','{{character_Id}}')">edit</button>
+      <button id= "delete" onclick="deleteCharacter('{{character_Id}}')">delete</button> 
       </div> 
     </td> 
 
@@ -94,7 +135,9 @@
 
 
 
-      <p>A drop down menu will go here to relate characters by the chosen attribute. A pop up with the table will appear. </p> 
+
+
+      <p></p> 
 
     </div>
 
@@ -115,6 +158,7 @@
       <form id = "addCharacter" action="/characters" method="post"
         class="form-container"> 
           <h3 id="form_text">Add a Character</h3>
+          <input type="hidden" name="character_id" id="c_id" value="99">
           <label for="Name"><b>Name:</b> 
           </label>
           <input id="name_input" type="text"
@@ -189,7 +233,7 @@
         document.getElementById("character-form").style.display = "none"; 
       }
 
-      function editCharacter(name,culture, mothers_house, fathers_house, allegiance, status){
+      function editCharacter(name,culture, mothers_house, fathers_house, allegiance, status, character_id){
         document.getElementById("character-form").style.display = "block";
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -258,11 +302,22 @@
           }
 
       }
-
+      console.log(character_id); 
+      document.getElementById("c_id").value = character_id; 
       document.getElementById("addCharacter").action = "/characters/update"
     
 
 
+    }
+
+    function deleteCharacter(character_id){
+      $.ajax({
+        url: '/delete/' + character_id,
+        type: 'POST',
+        success: function(result){
+            window.location.reload(true);
+        }
+    })
     }
 
     </script>
