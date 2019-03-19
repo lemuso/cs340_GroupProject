@@ -97,13 +97,16 @@
       }
 
     function deleteSeat(seat_id){
-      $.ajax({
-        url: '/seats/delete/' + seat_id,
-        type: 'POST',
-        success: function(result){
+      var confirmDelete = confirm("Are you sure you want to delete this seat?");
+      if(confirmDelete){
+        $.ajax({
+          url: '/seats/delete/' + seat_id,
+          type: 'POST',
+          success: function(result){
             window.location.reload(true);
         }
     })
+      }
     }
 
     </script>

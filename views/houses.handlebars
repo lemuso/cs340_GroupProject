@@ -30,7 +30,7 @@
       <td id="table_buttons>
       <div class="btns"> 
       <button id="edit">edit</button>
-      <button id= "delete">delete</button> 
+      <button id= "delete" onclick="deleteHouse('{{house_id}}')">delete</button>  
       </div> 
     </td> 
 
@@ -48,59 +48,80 @@
 
     </div>
 
-   <div class = "button-wrapper">
+    <div class = "button-wrapper">
       <button type="button" class="open-button" 
       onclick="openForm()"> ADD A HOUSE </button>
     </div>
 
-    <div class = "form-popup" id="form"> 
-      <form action="/action-page.html" style="background:url(houses.jpg)"
+
+
+    <div class = "form-popup" id="house-form"> 
+      <form id = "addHouse" action="/houses" method="post"
         class="form-container"> 
-          <h1>Add a House</h1>
-          <label for="Name"><b>Name:</b> 
-          </label>
-          <input type="text"
-          placeholder="Enter Name" name="name" required> 
+          <h3 id="form_text">Add a House</h3>
+          <label for="Name"><b>Name:</b> </label>
+          <input id="name_input" type="text"
+          placeholder="Enter Name" name="houses_name" required > 
 
-          <label for="Sigil"><b>Sigil:</b> 
-          </label>
-          <input type="text"
-          placeholder="Enter Sigil" name="Sigil"> 
+          <label for="Sigil"><b>Sigil:</b> </label>
+          <input id="sigil_input" type="text"
+          placeholder="Enter Sigil" name="sigil"> 
 
-          <label for="Words"><b>Words:</b> 
-          </label>
-          <textarea placeholder ="Enter a description" 
-          name="Words" rows= "10"></textarea>
+          <label for="Words"><b>Words:</b> </label>
+          <input id="words_input" type="text"
+          placeholder="Enter Words" name="words">
 
           <label for="Current Leader"><b>Current Leader:</b> 
           </label>
-          <input type="text"
-          placeholder="Enter the Current Leader" name="Current Leader"> 
+          <select id='current_leader-filter' name="current_leader"> 
+            <option value="" >null</option>
+            {{#each character}}
+            <option value="{{character_Id}}"> {{character_name}} </option> 
+            {{/each}}        
+          </select>
 
           <label for="isGreatHouse"><b>Great House?</b> 
           </label>
-          <select name="Great House"> 
-            <option value="No"> No</option> 
-            <option value="Yes"> Yes </option>
+          <select id='status_filter' name="is_great_house"> 
+            <option value="0">No</option> 
+            <option value="1">Yes</option>
           </select>
 
-          <button type=submit" 
-          class="submit-button"
-          onclick="closeForm()"> Submit</button> 
+          <input type="submit" class="submit-button" value="Submit" > 
           <button type="button"
           class="cancel-button" 
           onclick="closeForm()" > Cancel</button> 
+
       </form>
     </div>
 
+
     <script>
       function openForm(){
-        document.getElementById("form").style.display = "block"; 
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("house-form").style.display = "block"; 
+        document.getElementById("addHouse").reset();
       }
 
       function closeForm(){
-        document.getElementById("form").style.display = "none"; 
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("house-form").style.display = "none"; 
       }
+
+    function deleteHouse(house_id){
+      var confirmDelete = confirm("Are you sure you want to delete this house?");
+      if(confirmDelete){
+        $.ajax({
+          url: '/houses/delete/' + house_id,
+          type: 'POST',
+          success: function(result){
+            window.location.reload(true);
+        }
+    })
+      }
+    }
 
 
     </script>

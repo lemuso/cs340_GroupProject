@@ -311,13 +311,16 @@
     }
 
     function deleteCharacter(character_id){
-      $.ajax({
-        url: '/characters/delete/' + character_id,
-        type: 'POST',
-        success: function(result){
+      var confirmDelete = confirm("Are you sure you want to delete this character?");
+      if(confirmDelete){
+        $.ajax({
+          url: '/characters/delete/' + character_id,
+          type: 'POST',
+          success: function(result){
             window.location.reload(true);
         }
     })
+      }
     }
 
     </script>

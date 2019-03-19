@@ -87,13 +87,16 @@
       }
 
     function deleteCulture(culture_id){
-      $.ajax({
-        url: '/cultures/delete/' + culture_id,
-        type: 'POST',
-        success: function(result){
+      var confirmDelete = confirm("Are you sure you want to delete this culture?");
+      if(confirmDelete){
+        $.ajax({
+          url: '/cultures/delete/' + culture_id,
+          type: 'POST',
+          success: function(result){
             window.location.reload(true);
         }
     })
+      }
     }
 
     </script>
