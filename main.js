@@ -338,6 +338,49 @@ app.post('/seats/delete/:id', function(req, res){
   });
 });
 
+app.post('/houses', function(req, res){
+    console.log(req.body.house_name)
+    console.log(req.body)
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO houses (houses_name, sigil, words, current_leader, is_great_house) VALUES (?,?,?,?,?)";
+    var inserts = [req.body.houses_name, req.body.sigil, req.body.words, req.body.current_leader, req.body.is_great_house];
+
+
+    for(var i = 0; i < inserts.length; i++){
+      
+      if(inserts[i] == ''){
+        delete inserts[i];  
+      }
+
+    }
+
+    
+    sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+        if(error){
+            console.log(JSON.stringify(error))
+            res.write(JSON.stringify(error));
+            res.end();
+        }else{
+            res.redirect('/houses');
+        }
+    });
+});
+
+app.post('/houses/delete/:id', function(req, res){
+  console.log(req.params.id); 
+  var mysql = req.app.get('mysql');
+  var sql = "DELETE FROM houses WHERE house_id=?"; 
+  var inserts = [req.params.id]; 
+  sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+      if(error){
+          console.log(JSON.stringify(error))
+          res.write(JSON.stringify(error));
+          res.end();
+      }else{
+          res.redirect('/seats');
+      }
+  });
+});
 
 //app.get('/characters',function(req,res){
 //  res.render('characters'); 
