@@ -50,7 +50,6 @@
       <form id = "addCulture" action="/cultures" method="post"
         class="form-container"> 
           <h3 id="form_text">Add a Culture</h3>
-          <input type="hidden" name="culture_id" id="c_id">
           
           <label for="Name"><b>Name:</b></label>
           <input id="name_input" type="text"
@@ -77,14 +76,14 @@
       function openForm(){
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        document.getElementById("character-form").style.display = "block"; 
-        document.getElementById("addCharacter").reset();
+        document.getElementById("culture-form").style.display = "block"; 
+        document.getElementById("addCulture").reset();
       }
 
       function closeForm(){
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        document.getElementById("character-form").style.display = "none"; 
+        document.getElementById("culture-form").style.display = "none"; 
       }
 
     function deleteCulture(culture_id){

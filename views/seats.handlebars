@@ -18,7 +18,8 @@
       <td id="table_buttons>
       <div class="btns"> 
       <button id="edit">edit</button>
-      <button id= "delete">delete</button> 
+      <button id= "delete" onclick="deleteSeat('{{seat_id}}')">delete</button> 
+      </div> 
       </div> 
     </td> 
 
@@ -35,59 +36,75 @@
 
     </div>
 
-   <div class = "button-wrapper">
+    <div class = "button-wrapper">
       <button type="button" class="open-button" 
       onclick="openForm()"> ADD A SEAT </button>
     </div>
 
-    <div class = "form-popup" id="form"> 
-      <form action="/action-page.html" style="background:url(seat.jpg)"
+
+
+    <div class = "form-popup" id="seat-form"> 
+      <form id = "addSeat" action="/seats" method="post"
         class="form-container"> 
-          <h1>Add a Seat</h1>
-          <label for="Name"><b>Name:</b> 
+          <h3 id="form_text">Add a Seat</h3>
+          <label for="Name"><b>Name:</b> </label>
+          <input id="name_input" type="text"
+          placeholder="Enter Name" name="seat_name" required > 
+
+
+          <label for="House"><b>House:</b> 
           </label>
-          <input type="text"
-          placeholder="Enter Name" name="name" required> 
+          <select id='current_house-filter' name="current_house"> 
+            <option value="" >null</option>
+            {{#each house}}
+            <option value="{{house_id}}"> {{houses_name}} </option> 
+            {{/each}}
+            </select>
 
-          <label for="Current House"><b> Current House:</b> 
-          </label>
-          <select name="Current House"> 
-            <option value="Test1"> Test1 </option> 
-            <option value="Test2"> Test2 </option>
-            <option value="Test3"> Test3 </option>
-              <!--Make it so that options are brought in from available cultures--> 
-          </select>
+          <label for="Region"><b>Region:</b></label>
+          <input id="region_input" type="text" placeholder="Enter Region" name="region">
 
-          <label for="Region"><b>Region:</b> 
-          </label>
-          <input type="text"
-          placeholder="Enter Region" name="Region"> 
+          <label for="Founder"><b>Founder:</b></label>     
+          <select id='founder-filter' name="founder"> 
+            <option value="" >null</option>
+            {{#each character}}
+            <option value="{{character_id}}"> {{character_name}} </option> 
+            {{/each}}
+          </select>     
+          
 
-          <label for="Founder"><b>Founder:</b></label>          
-          <select name="Founder"> 
-            <option value="Test1"> Test1 </option> 
-            <option value="Test2"> Test2 </option>
-            <option value="Test3"> Test3 </option>
-              <!--Make it so that options are brought in from available Houses--> 
-          </select>
-
-          <button type=submit" 
-          class="submit-button"
-          onclick="closeForm()"> Submit</button> 
+          <input type="submit" class="submit-button" value="Submit" > 
           <button type="button"
           class="cancel-button" 
           onclick="closeForm()" > Cancel</button> 
+
       </form>
     </div>
 
+
     <script>
       function openForm(){
-        document.getElementById("form").style.display = "block"; 
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("seat-form").style.display = "block"; 
+        document.getElementById("addSeat").reset();
       }
 
       function closeForm(){
-        document.getElementById("form").style.display = "none"; 
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("seat-form").style.display = "none"; 
       }
+
+    function deleteSeat(seat_id){
+      $.ajax({
+        url: '/seats/delete/' + seat_id,
+        type: 'POST',
+        success: function(result){
+            window.location.reload(true);
+        }
+    })
+    }
 
     </script>
 
