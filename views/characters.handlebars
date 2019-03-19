@@ -158,7 +158,7 @@
       <form id = "addCharacter" action="/characters" method="post"
         class="form-container"> 
           <h3 id="form_text">Add a Character</h3>
-          <input type="hidden" name="character_id" id="c_id" value="99">
+          <input type="hidden" name="character_id" id="c_id">
           <label for="Name"><b>Name:</b> 
           </label>
           <input id="name_input" type="text"
@@ -312,7 +312,7 @@
 
     function deleteCharacter(character_id){
       $.ajax({
-        url: '/delete/' + character_id,
+        url: '/characters/delete/' + character_id,
         type: 'POST',
         success: function(result){
             window.location.reload(true);

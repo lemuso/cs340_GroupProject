@@ -19,7 +19,7 @@
       <td id="table_buttons>
       <div class="btns"> 
       <button id="edit">edit</button>
-      <button id= "delete">delete</button> 
+      <button id= "delete" onclick="deleteCulture('{{culture_id}}')">delete</button> 
       </div> 
     </td> 
 
@@ -39,56 +39,67 @@
     </div>
 
 
-   <div class = "button-wrapper">
+    <div class = "button-wrapper">
       <button type="button" class="open-button" 
       onclick="openForm()"> ADD A CULTURE </button>
     </div>
 
-    <div class = "form-popup" id="form"> 
-      <form action="/action-page.html" style="background:url(culture.jpg)"
+
+
+    <div class = "form-popup" id="culture-form"> 
+      <form id = "addCulture" action="/cultures" method="post"
         class="form-container"> 
-          <h1>Add a Culture</h1>
-          <label for="Name"><b>Name:</b> 
-          </label>
-          <input type="text"
-          placeholder="Enter Name" name="name" required> 
+          <h3 id="form_text">Add a Culture</h3>
+          <input type="hidden" name="culture_id" id="c_id">
+          
+          <label for="Name"><b>Name:</b></label>
+          <input id="name_input" type="text"
+          placeholder="Enter Name" name="culture_name" required > 
 
-          <label for="Language"><b>Language:</b> 
-          </label>
-          <input type="text"
-          placeholder="Enter Language" name="Language"> 
+          <label for="Language"><b>Language:</b></label>
+          <input id="language_input" type="text" placeholder="Enter Language" name="language">
+          
+          <label for="Religion"><b>Religion:</b></label>
+          <input id="religion_input" type="text" placeholder="Enter Religion" name="religion">
 
-          <label for="Religion"><b>Religion:</b> 
-          </label>
-          <input type="text"
-          placeholder="Enter Religion" name="Religion"> 
+          <label for="Society"><b>Society:</b></label>
+          <input id="language_input" type="text" placeholder="Enter Society" name="society">
 
-           <label for="Society"><b>Society:</b> 
-          </label>
-          <input type="text"
-          placeholder="Enter Society" name="Society">
-
-
-          <button type=submit" 
-          class="submit-button"
-          onclick="closeForm()"> Submit</button> 
+          <input type="submit" class="submit-button" value="Submit" > 
           <button type="button"
           class="cancel-button" 
           onclick="closeForm()" > Cancel</button> 
+
       </form>
     </div>
 
     <script>
       function openForm(){
-        document.getElementById("form").style.display = "block"; 
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("character-form").style.display = "block"; 
+        document.getElementById("addCharacter").reset();
       }
 
       function closeForm(){
-        document.getElementById("form").style.display = "none"; 
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.getElementById("character-form").style.display = "none"; 
       }
 
+    function deleteCulture(culture_id){
+      $.ajax({
+        url: '/cultures/delete/' + culture_id,
+        type: 'POST',
+        success: function(result){
+            window.location.reload(true);
+        }
+    })
+    }
 
     </script>
+
+
 
 
 
