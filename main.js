@@ -251,7 +251,7 @@ app.post('/characters/delete/:id', function(req, res){
 });
 
 app.post('/cultures', function(req, res){
-    console.log(req.body.character_name)
+    console.log(req.body.culture_name)
     console.log(req.body)
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO cultures (culture_name, language, religion, society) VALUES (?,?,?,?)";
@@ -290,6 +290,50 @@ app.post('/cultures/delete/:id', function(req, res){
           res.end();
       }else{
           res.redirect('/cultures');
+      }
+  });
+});
+
+app.post('/seats', function(req, res){
+    console.log(req.body.seat_name)
+    console.log(req.body)
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO seats (seat_name, current_house, region, founder) VALUES (?,?,?,?)";
+    var inserts = [req.body.seat_name, req.body.current_house, req.body.region, req.body.founder];
+
+
+    for(var i = 0; i < inserts.length; i++){
+      
+      if(inserts[i] == ''){
+        delete inserts[i];  
+      }
+
+    }
+
+    
+    sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+        if(error){
+            console.log(JSON.stringify(error))
+            res.write(JSON.stringify(error));
+            res.end();
+        }else{
+            res.redirect('/seats');
+        }
+    });
+});
+
+app.post('/seats/delete/:id', function(req, res){
+  console.log(req.params.id); 
+  var mysql = req.app.get('mysql');
+  var sql = "DELETE FROM seats WHERE seat_id=?"; 
+  var inserts = [req.params.id]; 
+  sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+      if(error){
+          console.log(JSON.stringify(error))
+          res.write(JSON.stringify(error));
+          res.end();
+      }else{
+          res.redirect('/seats');
       }
   });
 });
