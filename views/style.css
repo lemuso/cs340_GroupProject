@@ -160,6 +160,43 @@ button:hover{
     z-index: 9; 
 }
 
+#house-form{
+    font-family: GameofThrones; 
+    background-image: url("houses.jpg");
+    position: absolute;
+    width: 90%;
+    min-height:620px;
+    top:25px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;
+    z-index: 9; 
+}
+#culture-form{
+    font-family: GameofThrones; 
+    background-image: url("culture.jpg");
+    position: absolute;
+    width: 90%;
+    min-height:620px;
+    top:25px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;
+    z-index: 9;
+}
+
+#seat-form{
+    font-family: GameofThrones; 
+    background-image: url("seat.jpg");
+    position: absolute;
+    width: 90%;
+    min-height:620px;
+    top:25px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;
+    z-index: 9;
+}
 .form-container{
     position: relative;
     height: 100%;
@@ -246,6 +283,7 @@ button:hover{
 
 .filter-submit {
     font-family: GameofThrones; 
+    display: inline; 
     font-size: 1rem;
     color : black; 
     position:relative;

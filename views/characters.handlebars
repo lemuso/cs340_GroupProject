@@ -1,37 +1,39 @@
 <div class="data" id="data">
       <h2>Characters</h2>
+    
+
       <h2>Filter:</h2>
         
           <div class = "filter" id="filter-form"> 
             <form id = "filter" action="/filter" method="post">
-              <select>
+              <select name="filter_by">
                 <optgroup label = "Culture">
                   {{#each culture}}
-                  <option value="{'culture', '{{culture_id}}'}"> {{culture_name}} </option>
+                  <option value="characters.character_culture = {{culture_id}}"> {{culture_name}} </option>
                   {{/each}}
                 </optgroup>
 
                 <optgroup label = "Mother's House">
                     {{#each house}}
-                    <option value="{{house_id}}"> {{houses_name}} </option> 
+                    <option value="characters.mothers_house = {{house_id}}"> {{houses_name}} </option> 
                     {{/each}}
                 </optgroup>
 
                 <optgroup label = "Fathers's House">
                     {{#each house}}
-                    <option value="{{house_id}}"> {{houses_name}} </option> 
+                    <option value="characters.fathers_house = {{house_id}}"> {{houses_name}} </option> 
                     {{/each}}
                 </optgroup>
 
                 <optgroup label = "Allegiance">
                     {{#each house}}
-                    <option value="{{house_id}}"> {{houses_name}} </option> 
+                    <option value="characters.allegiance = {{house_id}}"> {{houses_name}} </option> 
                     {{/each}}
                 </optgroup>
 
                 <optgroup label = "Status">
-                    <option value="1"> Alive </option> 
-                    <option value="0"> Deceased </option> 
+                    <option value= "characters.is_alive = 1"> Alive </option> 
+                    <option value= "characters.is_alive = 0"> Deceased </option> 
                 </optgroup>
 
 

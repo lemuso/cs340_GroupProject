@@ -1,0 +1,91 @@
+<div class="data" id="data">
+      <h2>Filtered Characters</h2>
+        <table id="myTable"  cellpadding="10"> 
+  <thead>
+    <th>Name</th>
+    <th>Culture</th>
+    <th>Mother's House</th>
+    <th>Father's House</th>
+    <th>Allegiance</th>
+    <th>Status</th>
+  </thead>   
+  <tbody> 
+
+  {{#each characters}}
+    <tr> 
+      <td>{{character_name}}</td>
+      <td>
+        <script>
+            if(!'{{character_culture}}'){
+              document.write("Unknown"); 
+            }
+            else{
+              document.write('{{character_culture}}'); 
+            }
+        </script>
+
+      </td>
+      <td>
+        <script>
+            if(!'{{mothers_house}}'){
+              document.write("Unknown"); 
+            }
+            else{
+              document.write('{{mothers_house}}'); 
+            }
+        </script>
+      </td>
+
+      <td>
+        <script>
+            if(!'{{fathers_house}}'){
+              document.write("Unknown"); 
+            }
+            else{
+              document.write('{{fathers_house}}'); 
+            }
+        </script>
+      </td>
+
+
+      <td>
+        <script>
+            if(!'{{allegiance}}'){
+              document.write("Unknown"); 
+            }
+            else{
+              document.write('{{allegiance}}'); 
+            }
+        </script>
+
+      </td>
+
+      <td>
+        <script>
+          if({{is_alive}} == "1"){
+            document.write("Alive"); 
+          }
+          else{
+            document.write("Deceased"); 
+          }
+        </script>
+      </td> 
+    </td> 
+
+      </tr>
+  {{/each}}
+
+</tbody>
+
+<!--[{"character_id":1,"character_name":"Eddard Stark","character_culture":7,"mothers_house":null,"fathers_house":4,"allegiance":14,"is_alive":0}, -->
+
+  </table> 
+
+
+
+
+
+      <p></p> 
+
+    </div>
+

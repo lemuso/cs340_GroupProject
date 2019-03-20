@@ -17,7 +17,6 @@
       <td>{{founder}}</td>
       <td id="table_buttons>
       <div class="btns"> 
-      <button id="edit">edit</button>
       <button id= "delete" onclick="deleteSeat('{{seat_id}}')">delete</button> 
       </div> 
       </div> 
@@ -32,7 +31,7 @@
 
 
 
-      <p>A drop down menu will go here to relate characters by the chosen attribute. A pop up with the table will appear. </p> 
+      <p></p> 
 
     </div>
 
@@ -47,11 +46,11 @@
       <form id = "addSeat" action="/seats" method="post"
         class="form-container"> 
           <h3 id="form_text">Add a Seat</h3>
+          <input type="hidden" name="seat_id" id="s_id"> 
           <label for="Name"><b>Name:</b> </label>
           <input id="name_input" type="text"
           placeholder="Enter Name" name="seat_name" required > 
-
-
+          
           <label for="House"><b>House:</b> 
           </label>
           <select id='current_house-filter' name="current_house"> 
